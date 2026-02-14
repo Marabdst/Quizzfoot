@@ -61,6 +61,13 @@ export function Navbar() {
 
                 {/* Right actions */}
                 <div className="flex items-center gap-2">
+                    <Link href="/leaderboard" className="hover:text-primary transition-colors flex items-center gap-1">
+                        <Trophy className="w-4 h-4" />
+                        Classement
+                    </Link>
+                    <Link href="/grid" className="font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity flex items-center gap-1 animate-pulse">
+                        🧩 Mercato Grid
+                    </Link>
                     <ThemeToggle />
                     {loading ? (
                         <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
