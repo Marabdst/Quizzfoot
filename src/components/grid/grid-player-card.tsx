@@ -39,9 +39,7 @@ export function GridPlayerCard({ player, remainingCount, onSkip, className }: Gr
                 <h3 className="text-2xl font-black tracking-tight text-primary">
                     {player.name}
                 </h3>
-                <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                    {player.nationality}
-                </p>
+                {/* Nationality hidden for difficulty */}
             </div>
 
             {/* SKIP BUTTON */}

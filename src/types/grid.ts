@@ -39,4 +39,5 @@ export interface GridGameState {
     mistakes: number;
     status: 'idle' | 'playing' | 'won' | 'lost';
     dayId: string; // YYYY-MM-DD
+    timer: number; // Seconds remaining
 }

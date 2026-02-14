@@ -74,10 +74,8 @@ function generateDailyLevel(dateStr: string): { grid: GridTile[], deck: GridPlay
 interface GridStore extends GridGameState {
     initDaily: () => void;
     assignPlayer: (tileId: string) => void;
-    skipPlayer: () => void; // Put current player at bottom of deck? Or discard? 
-    // "Remaining players counter" implies we can skip or they are just in a queue.
-    // Spec: "Each player can only be placed once."
-    // Let's say Skip puts them at back of queue.
+    skipPlayer: () => void;
+    tickTimer: () => void;
     resetGame: () => void;
 }
 
@@ -89,6 +87,7 @@ const INITIAL_STATE: GridGameState = {
     mistakes: 0,
     status: 'idle',
     dayId: '',
+    timer: 180, // 3 minutes
 };
 
 export const useGridStore = create<GridStore>()(
@@ -113,6 +112,7 @@ export const useGridStore = create<GridStore>()(
                     deck,
                     status: 'playing',
                     dayId: today,
+                    timer: 180,
                 });
             },
 
@@ -149,45 +149,29 @@ export const useGridStore = create<GridStore>()(
                 } else {
                     // Failure
                     const newMistakes = mistakes + 1;
-                    const isLost = newMistakes >= 3; // Hardcore implicit or config? User said "Hardcore mode". 
-                    // Default mode: Unlimited mistakes? "Classic Daily: Unlimited mistakes".
-                    // Let's implement Classic for now (no lose on mistake, just Feedback).
-
-                    // But wait, "Immediate feedback: Correct -> Lock, Incorrect -> Error count".
-                    // Does the player stay current? Or moves to next?
-                    // Usually in these games, if you get it wrong, you lose the player (or lose a life).
-                    // If "Unlimited", maybe you just retry?
-                    // Spec: "Action: User clicks one tile to assign... Incorrect -> Error count increases".
-                    // It doesn't say "Next Player".
-                    // So user keeps the player and tries another tile?
-                    // OR user loses the player? 
-                    // "Player pool runs out" is a lose condition.
-                    // So incorrect assignment consumes the player? -> That makes it HARD.
-                    // Let's assume: Incorrect -> Error Flash -> Player stays (in Classic).
-                    // In Hardcore: Incorrect -> Player stays/Consumed?
-
                     set({
                         mistakes: newMistakes,
-                        // Flash feedback logic would be UI side ideally, or we set a temp state
                     });
                 }
             },
 
             skipPlayer: () => {
                 const { deck, currentPlayerIndex } = get();
-                // Cycle player to end of queue? Or discard?
-                // Spec: "Remaining players counter".
-                // Let's cycle to back.
                 const newDeck = [...deck];
                 const skipped = newDeck.splice(currentPlayerIndex, 1)[0];
                 newDeck.push(skipped);
-
-                // Current index stays same (pointing to new card at this index), unless we are at end.
-                // Actually if we modify deck, we should respect index.
-                // Simpler: Just increment index, but if index > length, wrap?
-                // No, simpler to just Move Item in array.
-
                 set({ deck: newDeck });
+            },
+
+            tickTimer: () => {
+                const { timer, status } = get();
+                if (status !== 'playing') return;
+
+                if (timer <= 0) {
+                    set({ status: 'lost' });
+                } else {
+                    set({ timer: timer - 1 });
+                }
             },
 
             resetGame: () => {

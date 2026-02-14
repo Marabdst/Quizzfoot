@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 export default function GridPage() {
     return (
         <div className="min-h-screen bg-background">
-            <Navbar />
             <main className="container max-w-6xl mx-auto py-6 sm:py-8">
                 <GridGame />
             </main>

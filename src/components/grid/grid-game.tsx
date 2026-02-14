@@ -5,19 +5,27 @@ import { useGridStore } from "@/lib/grid-store";
 import { GridTileCard } from "./grid-tile";
 import { GridPlayerCard } from "./grid-player-card";
 import { Button } from "@/components/ui/button";
-import { RefreshCw, Share2, Trophy } from "lucide-react";
+import { RefreshCw, Share2, Trophy, Clock } from "lucide-react";
 import confetti from "canvas-confetti";
 import { AnimatePresence, motion } from "framer-motion";
 
 export function GridGame() {
-    const { grid, deck, currentPlayerIndex, score, mistakes, status, initDaily, assignPlayer, skipPlayer, resetGame } = useGridStore();
+    const { grid, deck, currentPlayerIndex, score, mistakes, status, timer, initDaily, assignPlayer, skipPlayer, tickTimer } = useGridStore();
 
-    // Local state for error feedback on tiles
     const [errorTileId, setErrorTileId] = useState<string | null>(null);
 
     useEffect(() => {
         initDaily();
     }, [initDaily]);
+
+    // Timer Effect
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
+        if (status === 'playing') {
+            interval = setInterval(tickTimer, 1000);
+        }
+        return () => clearInterval(interval);
+    }, [status, tickTimer]);
 
     useEffect(() => {
         if (status === 'won') {
@@ -32,12 +40,6 @@ export function GridGame() {
     const handleTileClick = (tileId: string) => {
         if (status !== 'playing') return;
 
-        // Check if correct first (without modifying store yet, to show animation?)
-        // Actually store handles logic. But if we want Shake effect...
-        // The store doesn't expose "check" without "assign".
-        // We can just rely on store logic but we need to know if it failed.
-        // Store does `mistakes + 1` if failed.
-        // Let's check locally for UI effect.
         const currentPlayer = deck[currentPlayerIndex];
         const tile = grid.find(t => t.id === tileId);
         if (!tile || !currentPlayer) return;
@@ -47,37 +49,47 @@ export function GridGame() {
         if (isCorrect) {
             assignPlayer(tileId);
         } else {
-            // Trigger Error Animation
             setErrorTileId(tileId);
             setTimeout(() => setErrorTileId(null), 500);
-            assignPlayer(tileId); // Will increment mistakes
+            assignPlayer(tileId);
         }
     };
 
     const currentPlayer = deck[currentPlayerIndex];
     const isGameOver = status === 'won' || status === 'lost';
 
+    // Format Timer MM:SS
+    const formatTime = (seconds: number) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+
     if (!currentPlayer && !isGameOver && status === 'playing') {
-        // Deck empty but not won? -> Lost (handled by store usually, but let's be safe)
         return <div className="p-10 text-center">Plus de joueurs !</div>;
     }
 
     return (
         <div className="w-full max-w-4xl mx-auto flex flex-col items-center gap-6 p-4">
 
-            {/* HEADER: Score & Status */}
-            <div className="w-full flex justify-between items-center bg-card border rounded-lg p-4 shadow-sm">
-                <div className="flex flex-col">
+            {/* HEADER: Score, Title, Timer, Mistakes */}
+            <div className="w-full grid grid-cols-3 items-center bg-card border rounded-lg p-4 shadow-sm">
+                <div className="flex flex-col items-start gap-1">
                     <span className="text-xs text-muted-foreground font-bold uppercase">Score</span>
                     <span className="text-2xl font-black text-primary">{score}/16</span>
                 </div>
-                <div className="text-center">
-                    <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+
+                <div className="flex flex-col items-center gap-1">
+                    <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent hidden sm:block">
                         MERCATO GRID
                     </h1>
-                    <span className="text-xs text-muted-foreground">{new Date().toLocaleDateString()}</span>
+                    <div className={`flex items-center gap-2 font-mono text-xl font-bold ${timer < 30 ? 'text-red-500 animate-pulse' : 'text-foreground'}`}>
+                        <Clock className="w-4 h-4" />
+                        {formatTime(timer)}
+                    </div>
                 </div>
-                <div className="flex flex-col items-end">
+
+                <div className="flex flex-col items-end gap-1">
                     <span className="text-xs text-muted-foreground font-bold uppercase">Erreurs</span>
                     <span className={mistakes > 0 ? "text-red-500 font-bold" : "text-green-500 font-bold"}>
                         {mistakes}
@@ -88,7 +100,7 @@ export function GridGame() {
             {/* MAIN GAME AREA */}
             <div className="w-full grid lg:grid-cols-[1fr_350px] gap-8 items-start">
 
-                {/* THE GRID (Left on Desktop, Bottom on Mobile) */}
+                {/* THE GRID */}
                 <div className="order-2 lg:order-1">
                     <div className="grid grid-cols-4 gap-2 sm:gap-3 aspect-square w-full">
                         <AnimatePresence>
@@ -109,7 +121,7 @@ export function GridGame() {
                     </div>
                 </div>
 
-                {/* ACTIVE PLAYER CARD (Right on Desktop, Top on Mobile) */}
+                {/* ACTIVE PLAYER CARD */}
                 <div className="order-1 lg:order-2 w-full flex flex-col gap-4">
                     {isGameOver ? (
                         <div className="bg-card border-2 border-primary rounded-xl p-8 text-center space-y-4 animate-in fade-in zoom-in">
@@ -118,7 +130,7 @@ export function GridGame() {
                                 {status === 'won' ? "GRID COMPLETED!" : "GAME OVER"}
                             </h2>
                             <p className="text-muted-foreground">
-                                Score final: {score}/16 <br />
+                                {status === 'lost' && timer <= 0 ? "Temps écoulé !" : `Score final: ${score}/16`} <br />
                                 Erreurs: {mistakes}
                             </p>
                             <div className="flex gap-2 justify-center">
@@ -144,13 +156,11 @@ export function GridGame() {
                     {!isGameOver && (
                         <div className="bg-secondary/30 p-4 rounded-lg text-xs text-muted-foreground text-center">
                             <p>👇 Clique sur une case pour placer le joueur.</p>
-                            <p>⚠️ Une erreur = le joueur reste mais le compteur augmente.</p>
                         </div>
                     )}
                 </div>
 
             </div>
-
         </div>
     );
 }

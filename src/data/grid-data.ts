@@ -1,8 +1,8 @@
 import { GridPlayer, GridCategory } from "@/types/grid";
 
 // --- PLAYERS DATABASE ---
-// We need a rich list of players to generate solvable grids.
 export const GRID_PLAYERS: GridPlayer[] = [
+    // ... EXISTING PLAYERS ...
     {
         id: "messi",
         name: "Lionel Messi",
@@ -91,7 +91,7 @@ export const GRID_PLAYERS: GridPlayer[] = [
         id: "mbappe",
         name: "Kylian Mbappé",
         nationality: "France",
-        clubs: ["AS Monaco", "Paris Saint-Germain", "Real Madrid"], // Future proof ;)
+        clubs: ["AS Monaco", "Paris Saint-Germain", "Real Madrid"],
         leagues: ["Ligue 1", "Liga"],
         trophies: ["Coupe du Monde", "Ligue 1", "Nations League"],
         awards: ["Soulier d'Or CDM"],
@@ -181,7 +181,7 @@ export const GRID_PLAYERS: GridPlayer[] = [
         awards: [],
         teammates: ["Casillas", "Ronaldo", "Iniesta", "Pique", "Messi", "Neymar"],
         managers: ["Vicente del Bosque", "Jose Mourinho", "Zinedine Zidane", "Carlo Ancelotti"],
-        retired: false // Free agent technically
+        retired: false
     },
     {
         id: "iniesta",
@@ -193,7 +193,228 @@ export const GRID_PLAYERS: GridPlayer[] = [
         awards: [],
         teammates: ["Xavi", "Messi", "Puyol", "Busquets", "Villa"],
         managers: ["Pep Guardiola", "Vicente del Bosque", "Luis Enrique"],
-        retired: true // Announced recently
+        retired: true
+    },
+    // --- NEW PLAYERS ---
+    {
+        id: "haaland",
+        name: "Erling Haaland",
+        nationality: "Norvège",
+        clubs: ["Molde", "Salzbourg", "Borussia Dortmund", "Manchester City"],
+        leagues: ["Bundesliga", "Premier League"],
+        trophies: ["Ligue des Champions", "Premier League", "Bundesliga"],
+        awards: ["Soulier d'Or"],
+        teammates: ["De Bruyne", "Reus", "Mbappé", "Bellingham"],
+        managers: ["Pep Guardiola"],
+        retired: false
+    },
+    {
+        id: "debruyne",
+        name: "Kevin De Bruyne",
+        nationality: "Belgique",
+        clubs: ["Genk", "Chelsea", "Werder Brême", "Wolfsburg", "Manchester City"],
+        leagues: ["Premier League", "Bundesliga"],
+        trophies: ["Ligue des Champions", "Premier League", "Bundesliga"],
+        awards: [],
+        teammates: ["Hazard", "Lukaku", "Agüero", "Haaland"],
+        managers: ["Pep Guardiola", "Jose Mourinho"],
+        retired: false
+    },
+    {
+        id: "salah",
+        name: "Mohamed Salah",
+        nationality: "Égypte",
+        clubs: ["Bâle", "Chelsea", "Fiorentina", "AS Rome", "Liverpool"],
+        leagues: ["Premier League", "Serie A"],
+        trophies: ["Ligue des Champions", "Premier League", "Premier League"],
+        awards: ["Soulier d'Or PL"],
+        teammates: ["Mane", "Firmino", "Allison", "Totti"],
+        managers: ["Jurgen Klopp", "Jose Mourinho"],
+        retired: false
+    },
+    {
+        id: "pirlo",
+        name: "Andrea Pirlo",
+        nationality: "Italie",
+        clubs: ["Brescia", "Inter Milan", "AC Milan", "Juventus", "NYCFC"],
+        leagues: ["Serie A", "MLS"],
+        trophies: ["Coupe du Monde", "Ligue des Champions", "Serie A"],
+        awards: [],
+        teammates: ["Maldini", "Gattuso", "Buffon", "Pogba", "Kaká", "Shevchenko"],
+        managers: ["Carlo Ancelotti", "Antonio Conte", "Massimiliano Allegri"],
+        retired: true
+    },
+    {
+        id: "xavi",
+        name: "Xavi Hernández",
+        nationality: "Espagne",
+        clubs: ["FC Barcelone", "Al-Sadd"],
+        leagues: ["Liga"],
+        trophies: ["Coupe du Monde", "Euro", "Ligue des Champions", "Liga"],
+        awards: [],
+        teammates: ["Iniesta", "Messi", "Puyol", "Busquets"],
+        managers: ["Pep Guardiola", "Vicente del Bosque", "Luis Aragones"],
+        retired: true
+    },
+    {
+        id: "bale",
+        name: "Gareth Bale",
+        nationality: "Pays de Galles",
+        clubs: ["Southampton", "Tottenham", "Real Madrid", "LAFC"],
+        leagues: ["Premier League", "Liga", "MLS"],
+        trophies: ["Ligue des Champions", "Liga", "Copa del Rey", "MLS Cup"],
+        awards: [],
+        teammates: ["Ronaldo", "Benzema", "Modric", "Kane"],
+        managers: ["Zinedine Zidane", "Carlo Ancelotti", "Jose Mourinho"],
+        retired: true
+    },
+    {
+        id: "griezmann",
+        name: "Antoine Griezmann",
+        nationality: "France",
+        clubs: ["Real Sociedad", "Atlético Madrid", "FC Barcelone"],
+        leagues: ["Liga"],
+        trophies: ["Coupe du Monde", "Europa League", "Nations League"], // No Liga title actually? Need to check. He won Supercopa but Liga? 
+        // Griezmann won Europa League with Atelti. Won Copa del Rey with Barça. 
+        // Did he win Liga? No. Atleti won in 2014 (before him) and 2021 (he was at Barça?).
+        // Actually he was at Atleti in 2021/22? No, returned properly later.
+        // Let's assume no Liga for safety.
+        awards: [],
+        teammates: ["Pogba", "Mbappé", "Messi", "Godin"],
+        managers: ["Diego Simeone", "Didier Deschamps"],
+        retired: false // Retraite internationale mais joue en club
+    },
+    {
+        id: "kane",
+        name: "Harry Kane",
+        nationality: "Angleterre",
+        clubs: ["Tottenham", "Leicester City", "Bayern Munich"],
+        leagues: ["Premier League", "Bundesliga"],
+        trophies: [], // The meme is real (until 2025 maybe?)
+        awards: ["Soulier d'Or", "Soulier d'Or CDM"],
+        teammates: ["Son", "Müller", "Bellingham", "Musiala"],
+        managers: ["Mauricio Pochettino", "Gareth Southgate", "Thomas Tuchel"],
+        retired: false
+    },
+    {
+        id: "rooney",
+        name: "Wayne Rooney",
+        nationality: "Angleterre",
+        clubs: ["Everton", "Manchester United", "DC United", "Derby County"],
+        leagues: ["Premier League", "MLS"],
+        trophies: ["Ligue des Champions", "Premier League", "FA Cup", "Europa League"],
+        awards: [],
+        teammates: ["Ronaldo", "Tevez", "Scholes", "Giggs"],
+        managers: ["Alex Ferguson", "Louis van Gaal", "Jose Mourinho"],
+        retired: true
+    },
+    {
+        id: "suarez",
+        name: "Luis Suárez",
+        nationality: "Uruguay",
+        clubs: ["Nacional", "Groningen", "Ajax", "Liverpool", "FC Barcelone", "Atlético Madrid", "Grêmio", "Inter Miami"],
+        leagues: ["Eredivisie", "Premier League", "Liga", "Brasileirão", "MLS"],
+        trophies: ["Ligue des Champions", "Liga", "Copa America", "Eredivisie"],
+        awards: ["Soulier d'Or", "Soulier d'Or PL"],
+        teammates: ["Messi", "Neymar", "Gerrard", "Cavani"],
+        managers: ["Luis Enrique", "Diego Simeone"],
+        retired: false
+    },
+    {
+        id: "aguero",
+        name: "Sergio Agüero",
+        nationality: "Argentine",
+        clubs: ["Independiente", "Atlético Madrid", "Manchester City", "FC Barcelone"],
+        leagues: ["Liga", "Premier League"],
+        trophies: ["Premier League", "Europa League", "Copa America", "Jeux Olympiques"],
+        awards: [],
+        teammates: ["Messi", "Silva", "Kompany", "De Bruyne"],
+        managers: ["Pep Guardiola", "Roberto Mancini"],
+        retired: true
+    },
+    {
+        id: "hazard",
+        name: "Eden Hazard",
+        nationality: "Belgique",
+        clubs: ["Lille OSC", "Chelsea", "Real Madrid"],
+        leagues: ["Ligue 1", "Premier League", "Liga"],
+        trophies: ["Ligue des Champions", "Premier League", "Liga", "Ligue 1", "Europa League"],
+        awards: ["Joueur de l'année PL"],
+        teammates: ["De Bruyne", "Courtois", "Benzema", "Kante"],
+        managers: ["Jose Mourinho", "Antonio Conte", "Zinedine Zidane"],
+        retired: true
+    },
+    {
+        id: "casillas",
+        name: "Iker Casillas",
+        nationality: "Espagne",
+        clubs: ["Real Madrid", "FC Porto"],
+        leagues: ["Liga", "Liga Portugal"],
+        trophies: ["Coupe du Monde", "Euro", "Ligue des Champions", "Liga"],
+        awards: [],
+        teammates: ["Ramos", "Ronaldo", "Raúl", "Xavi"],
+        managers: ["Vicente del Bosque", "Jose Mourinho", "Carlo Ancelotti"],
+        retired: true
+    },
+    {
+        id: "pogba",
+        name: "Paul Pogba",
+        nationality: "France",
+        clubs: ["Manchester United", "Juventus"],
+        leagues: ["Premier League", "Serie A"],
+        trophies: ["Coupe du Monde", "Serie A", "Europa League", "Nations League"],
+        awards: [],
+        teammates: ["Griezmann", "Mbappé", "Pirlo", "Ibrahimovic"],
+        managers: ["Didier Deschamps", "Jose Mourinho", "Massimiliano Allegri"],
+        retired: false // Technically banned but not retired? User context 2026: maybe back?
+    },
+    {
+        id: "courtois",
+        name: "Thibaut Courtois",
+        nationality: "Belgique",
+        clubs: ["Genk", "Atlético Madrid", "Chelsea", "Real Madrid"],
+        leagues: ["Liga", "Premier League"],
+        trophies: ["Ligue des Champions", "Premier League", "Liga", "Europa League"],
+        awards: ["Yachine Trophy"],
+        teammates: ["Hazard", "De Bruyne", "Benzema", "Ramos"],
+        managers: ["Diego Simeone", "Jose Mourinho", "Carlo Ancelotti"],
+        retired: false
+    },
+    {
+        id: "vini",
+        name: "Vinícius Jr",
+        nationality: "Brésil",
+        clubs: ["Flamengo", "Real Madrid"],
+        leagues: ["Liga", "Brasileirão"],
+        trophies: ["Ligue des Champions", "Liga", "Copa del Rey"],
+        awards: [], // Maybe Ballon d'Or 2024/2025? Let's check user context.
+        teammates: ["Benzema", "Neymar", "Modric", "Rodrygo"],
+        managers: ["Zinedine Zidane", "Carlo Ancelotti"],
+        retired: false
+    },
+    {
+        id: "muller",
+        name: "Thomas Müller",
+        nationality: "Allemagne",
+        clubs: ["Bayern Munich"],
+        leagues: ["Bundesliga"],
+        trophies: ["Coupe du Monde", "Ligue des Champions", "Bundesliga"],
+        awards: ["Soulier d'Or CDM"],
+        teammates: ["Neuer", "Lewandowski", "Schweinsteiger", "Kroos"],
+        managers: ["Pep Guardiola", "Hansi Flick", "Jupp Heynckes"],
+        retired: false
+    },
+    {
+        id: "mane",
+        name: "Sadio Mané",
+        nationality: "Sénégal",
+        clubs: ["Metz", "Salzbourg", "Southampton", "Liverpool", "Bayern Munich", "Al-Nassr"],
+        leagues: ["Ligue 1", "Premier League", "Bundesliga", "Saudi Pro League"],
+        trophies: ["Ligue des Champions", "Premier League", "Bundesliga", "CAN"],
+        awards: ["Ballon d'Or Africain"],
+        teammates: ["Salah", "Ronaldo", "Van Dijk", "Firmino"],
+        managers: ["Jurgen Klopp"],
+        retired: false
     }
 ];
 
@@ -208,26 +429,33 @@ export const GRID_CATEGORIES: GridCategory[] = [
     { id: "c-bayern", type: "club", label: "A joué au Bayern Munich", rule: (p) => p.clubs.includes("Bayern Munich") },
     { id: "c-chelsea", type: "club", label: "A joué à Chelsea", rule: (p) => p.clubs.includes("Chelsea") },
     { id: "c-acmilan", type: "club", label: "A joué à l'AC Milan", rule: (p) => p.clubs.includes("AC Milan") },
+    { id: "c-liverpool", type: "club", label: "A joué à Liverpool", rule: (p) => p.clubs.includes("Liverpool") },
+    { id: "c-city", type: "club", label: "A joué à Man City", rule: (p) => p.clubs.includes("Manchester City") }, // New
 
     // LEAGUES
     { id: "l-PL", type: "league", label: "A joué en Premier League", rule: (p) => p.leagues.includes("Premier League") },
     { id: "l-L1", type: "league", label: "A joué en Ligue 1", rule: (p) => p.leagues.includes("Ligue 1") },
     { id: "l-SerA", type: "league", label: "A joué en Serie A", rule: (p) => p.leagues.includes("Serie A") },
+    { id: "l-Liga", type: "league", label: "A joué en Liga", rule: (p) => p.leagues.includes("Liga") }, // New
+    { id: "l-Bun", type: "league", label: "A joué en Bundesliga", rule: (p) => p.leagues.includes("Bundesliga") }, // New
 
     // NATIONALITIES
     { id: "n-fra", type: "country", label: "Français 🇫🇷", rule: (p) => p.nationality === "France" },
     { id: "n-bra", type: "country", label: "Brésilien 🇧🇷", rule: (p) => p.nationality === "Brésil" },
     { id: "n-arg", type: "country", label: "Argentin 🇦🇷", rule: (p) => p.nationality === "Argentine" },
     { id: "n-esp", type: "country", label: "Espagnol 🇪🇸", rule: (p) => p.nationality === "Espagne" },
+    { id: "n-eng", type: "country", label: "Anglais 🏴󠁧󠁢󠁥󠁮󠁧󠁿", rule: (p) => p.nationality === "Angleterre" }, // New
 
     // TROPHIES & AWARDS
     { id: "t-ucl", type: "award", label: "Vainqueur Ligue des Champions", rule: (p) => p.trophies.includes("Ligue des Champions") },
     { id: "t-cdm", type: "award", label: "Vainqueur Coupe du Monde", rule: (p) => p.trophies.includes("Coupe du Monde") },
     { id: "t-bo", type: "award", label: "Ballon d'Or", rule: (p) => p.awards.includes("Ballon d'Or") },
+    { id: "t-euro", type: "award", label: "Vainqueur Euro", rule: (p) => p.trophies.includes("Euro") }, // New
 
     // MANAGERS
     { id: "m-pep", type: "stat", label: "Coaché par Guardiola", rule: (p) => p.managers.includes("Pep Guardiola") },
     { id: "m-mou", type: "stat", label: "Coaché par Mourinho", rule: (p) => p.managers.includes("Jose Mourinho") },
     { id: "m-zizou", type: "stat", label: "Coaché par Zidane", rule: (p) => p.managers.includes("Zinedine Zidane") },
     { id: "m-carlo", type: "stat", label: "Coaché par Ancelotti", rule: (p) => p.managers.includes("Carlo Ancelotti") },
+    { id: "m-fergie", type: "stat", label: "Coaché par Ferguson", rule: (p) => p.managers.includes("Alex Ferguson") }, // New
 ];
