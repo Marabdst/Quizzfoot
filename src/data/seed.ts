@@ -88,6 +88,7 @@ export const questions: Question[] = [
     q("ligue-des-champions", "tf", "L'Ajax Amsterdam a atteint les demi-finales de l'UCL en 2019.", ["Vrai", "Faux"], "Vrai", "L'Ajax de ten Hag a éliminé le Real Madrid et la Juventus avant de tomber face à Tottenham.", 2, ["histoire"], "Champions League", "2018-2019"),
     q("ligue-des-champions", "mcq", "Quel est le score le plus large en match de phase de groupes UCL ?", ["8-0", "10-0", "12-1", "7-0"], "12-1", "Le record est un 12-1 infligé par le Feyenoord à un club en tour préliminaire.", 5, ["records"], "Champions League"),
     q("ligue-des-champions", "mcq", "Quel entraîneur a remporté le plus de Ligues des Champions ?", ["Zinedine Zidane", "Carlo Ancelotti", "Bob Paisley", "Pep Guardiola"], "Carlo Ancelotti", "Ancelotti a remporté 5 UCL (2003, 2007, 2014, 2022, 2024).", 3, ["entraîneurs"], "Champions League"),
+    q("ligue-des-champions", "mcq", "Quel club français a remporté la Ligue des Champions en 2025 ?", ["Olympique Lyonnais", "AS Monaco", "Paris Saint-Germain", "Olympique de Marseille"], "Paris Saint-Germain", "Le PSG a enfin décroché sa première étoile en battant le Real Madrid en finale.", 1, ["histoire", "actualité"], "Champions League", "2024-2025"),
 
     // ═══ COUPE DU MONDE (15) ═══
     q("coupe-du-monde", "mcq", "Quel pays a remporté le plus de Coupes du Monde ?", ["Allemagne", "Argentine", "Italie", "Brésil"], "Brésil", "Le Brésil détient le record avec 5 titres (1958, 1962, 1970, 1994, 2002).", 1, ["histoire"], "Coupe du Monde"),
