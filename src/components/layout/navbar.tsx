@@ -62,6 +62,9 @@ export function Navbar() {
                 {/* Right actions */}
                 <div className="flex items-center gap-2">
                     <ThemeToggle />
+                    <Link href="/bingo" className="hidden md:flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-purple-400 hover:text-purple-300 hover:bg-accent transition-colors animate-pulse">
+                        🎲 Bingo
+                    </Link>
                     {loading ? (
                         <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
                     ) : user ? (
