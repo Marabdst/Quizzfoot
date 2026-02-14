@@ -9,6 +9,33 @@ import { RefreshCw, Share2, Trophy, Clock } from "lucide-react";
 import confetti from "canvas-confetti";
 import { AnimatePresence, motion } from "framer-motion";
 
+function CountdownToMidnight() {
+    const [timeLeft, setTimeLeft] = useState("");
+
+    useEffect(() => {
+        const updateTimer = () => {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+            tomorrow.setUTCHours(0, 0, 0, 0);
+
+            const diff = tomorrow.getTime() - now.getTime();
+
+            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((diff / (1000 * 60)) % 60);
+            const s = Math.floor((diff / 1000) % 60);
+
+            setTimeLeft(`${h}h ${m}m ${s}s`);
+        };
+
+        updateTimer();
+        const interval = setInterval(updateTimer, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    return <span className="font-mono text-xl font-bold">{timeLeft}</span>;
+}
+
 export function GridGame() {
     const { grid, deck, currentPlayerIndex, score, mistakes, status, timer, initDaily, assignPlayer, skipPlayer, tickTimer } = useGridStore();
 
@@ -135,11 +162,16 @@ export function GridGame() {
                             </p>
                             <div className="flex gap-2 justify-center">
                                 <Button onClick={() => window.location.reload()}>
-                                    <RefreshCw className="w-4 h-4 mr-2" /> Rejouer
+                                    <RefreshCw className="w-4 h-4 mr-2" /> Actualiser
                                 </Button>
                                 <Button variant="outline">
                                     <Share2 className="w-4 h-4 mr-2" /> Partager
                                 </Button>
+                            </div>
+
+                            <div className="pt-4 border-t">
+                                <p className="text-xs text-muted-foreground uppercase font-bold mb-1">Prochaine grille dans</p>
+                                <CountdownToMidnight />
                             </div>
                         </div>
                     ) : (
