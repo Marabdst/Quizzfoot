@@ -4,6 +4,7 @@ export interface GridCategory {
     id: string;
     type: GridCategoryType;
     label: string;
+    icon?: string; // Emoji or generic icon class
     // A function to check if a player matches this category
     // In a real DB, this would be a query. Here, we check player tags/attributes.
     rule: (player: GridPlayer) => boolean;

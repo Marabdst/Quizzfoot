@@ -274,15 +274,11 @@ export const GRID_PLAYERS: GridPlayer[] = [
         nationality: "France",
         clubs: ["Real Sociedad", "Atlético Madrid", "FC Barcelone"],
         leagues: ["Liga"],
-        trophies: ["Coupe du Monde", "Europa League", "Nations League"], // No Liga title actually? Need to check. He won Supercopa but Liga? 
-        // Griezmann won Europa League with Atelti. Won Copa del Rey with Barça. 
-        // Did he win Liga? No. Atleti won in 2014 (before him) and 2021 (he was at Barça?).
-        // Actually he was at Atleti in 2021/22? No, returned properly later.
-        // Let's assume no Liga for safety.
+        trophies: ["Coupe du Monde", "Europa League", "Nations League"],
         awards: [],
         teammates: ["Pogba", "Mbappé", "Messi", "Godin"],
         managers: ["Diego Simeone", "Didier Deschamps"],
-        retired: false // Retraite internationale mais joue en club
+        retired: false
     },
     {
         id: "kane",
@@ -290,7 +286,7 @@ export const GRID_PLAYERS: GridPlayer[] = [
         nationality: "Angleterre",
         clubs: ["Tottenham", "Leicester City", "Bayern Munich"],
         leagues: ["Premier League", "Bundesliga"],
-        trophies: [], // The meme is real (until 2025 maybe?)
+        trophies: [],
         awards: ["Soulier d'Or", "Soulier d'Or CDM"],
         teammates: ["Son", "Müller", "Bellingham", "Musiala"],
         managers: ["Mauricio Pochettino", "Gareth Southgate", "Thomas Tuchel"],
@@ -366,7 +362,7 @@ export const GRID_PLAYERS: GridPlayer[] = [
         awards: [],
         teammates: ["Griezmann", "Mbappé", "Pirlo", "Ibrahimovic"],
         managers: ["Didier Deschamps", "Jose Mourinho", "Massimiliano Allegri"],
-        retired: false // Technically banned but not retired? User context 2026: maybe back?
+        retired: false
     },
     {
         id: "courtois",
@@ -387,7 +383,7 @@ export const GRID_PLAYERS: GridPlayer[] = [
         clubs: ["Flamengo", "Real Madrid"],
         leagues: ["Liga", "Brasileirão"],
         trophies: ["Ligue des Champions", "Liga", "Copa del Rey"],
-        awards: [], // Maybe Ballon d'Or 2024/2025? Let's check user context.
+        awards: [],
         teammates: ["Benzema", "Neymar", "Modric", "Rodrygo"],
         managers: ["Zinedine Zidane", "Carlo Ancelotti"],
         retired: false
@@ -421,41 +417,43 @@ export const GRID_PLAYERS: GridPlayer[] = [
 // --- CATEGORIES DATABASE ---
 export const GRID_CATEGORIES: GridCategory[] = [
     // CLUBS
-    { id: "c-real", type: "club", label: "A joué au Real Madrid", rule: (p) => p.clubs.includes("Real Madrid") },
-    { id: "c-barca", type: "club", label: "A joué au FC Barcelone", rule: (p) => p.clubs.includes("FC Barcelone") },
-    { id: "c-psg", type: "club", label: "A joué au PSG", rule: (p) => p.clubs.includes("Paris Saint-Germain") },
-    { id: "c-juve", type: "club", label: "A joué à la Juventus", rule: (p) => p.clubs.includes("Juventus") },
-    { id: "c-manutd", type: "club", label: "A joué à Man Utd", rule: (p) => p.clubs.includes("Manchester United") },
-    { id: "c-bayern", type: "club", label: "A joué au Bayern Munich", rule: (p) => p.clubs.includes("Bayern Munich") },
-    { id: "c-chelsea", type: "club", label: "A joué à Chelsea", rule: (p) => p.clubs.includes("Chelsea") },
-    { id: "c-acmilan", type: "club", label: "A joué à l'AC Milan", rule: (p) => p.clubs.includes("AC Milan") },
-    { id: "c-liverpool", type: "club", label: "A joué à Liverpool", rule: (p) => p.clubs.includes("Liverpool") },
-    { id: "c-city", type: "club", label: "A joué à Man City", rule: (p) => p.clubs.includes("Manchester City") }, // New
+    { id: "c-real", type: "club", label: "Real Madrid", icon: "👑", rule: (p) => p.clubs.includes("Real Madrid") },
+    { id: "c-barca", type: "club", label: "FC Barcelone", icon: "🔵🔴", rule: (p) => p.clubs.includes("FC Barcelone") },
+    { id: "c-psg", type: "club", label: "PSG", icon: "🗼", rule: (p) => p.clubs.includes("Paris Saint-Germain") },
+    { id: "c-juve", type: "club", label: "Juventus", icon: "🦓", rule: (p) => p.clubs.includes("Juventus") },
+    { id: "c-manutd", type: "club", label: "Man Utd", icon: "👹", rule: (p) => p.clubs.includes("Manchester United") },
+    { id: "c-bayern", type: "club", label: "Bayern Munich", icon: "🍺", rule: (p) => p.clubs.includes("Bayern Munich") },
+    { id: "c-chelsea", type: "club", label: "Chelsea", icon: "🦁", rule: (p) => p.clubs.includes("Chelsea") },
+    { id: "c-acmilan", type: "club", label: "AC Milan", icon: "⚫🔴", rule: (p) => p.clubs.includes("AC Milan") },
+    { id: "c-liverpool", type: "club", label: "Liverpool", icon: "🔴", rule: (p) => p.clubs.includes("Liverpool") },
+    { id: "c-city", type: "club", label: "Man City", icon: "💎", rule: (p) => p.clubs.includes("Manchester City") },
 
     // LEAGUES
-    { id: "l-PL", type: "league", label: "A joué en Premier League", rule: (p) => p.leagues.includes("Premier League") },
-    { id: "l-L1", type: "league", label: "A joué en Ligue 1", rule: (p) => p.leagues.includes("Ligue 1") },
-    { id: "l-SerA", type: "league", label: "A joué en Serie A", rule: (p) => p.leagues.includes("Serie A") },
-    { id: "l-Liga", type: "league", label: "A joué en Liga", rule: (p) => p.leagues.includes("Liga") }, // New
-    { id: "l-Bun", type: "league", label: "A joué en Bundesliga", rule: (p) => p.leagues.includes("Bundesliga") }, // New
+    { id: "l-PL", type: "league", label: "Premier League", icon: "🦁", rule: (p) => p.leagues.includes("Premier League") },
+    { id: "l-L1", type: "league", label: "Ligue 1", icon: "🇫🇷", rule: (p) => p.leagues.includes("Ligue 1") },
+    { id: "l-SerA", type: "league", label: "Serie A", icon: "🇮🇹", rule: (p) => p.leagues.includes("Serie A") },
+    { id: "l-Liga", type: "league", label: "Liga", icon: "🇪🇸", rule: (p) => p.leagues.includes("Liga") },
+    { id: "l-Bun", type: "league", label: "Bundesliga", icon: "🇩🇪", rule: (p) => p.leagues.includes("Bundesliga") },
 
     // NATIONALITIES
-    { id: "n-fra", type: "country", label: "Français 🇫🇷", rule: (p) => p.nationality === "France" },
-    { id: "n-bra", type: "country", label: "Brésilien 🇧🇷", rule: (p) => p.nationality === "Brésil" },
-    { id: "n-arg", type: "country", label: "Argentin 🇦🇷", rule: (p) => p.nationality === "Argentine" },
-    { id: "n-esp", type: "country", label: "Espagnol 🇪🇸", rule: (p) => p.nationality === "Espagne" },
-    { id: "n-eng", type: "country", label: "Anglais 🏴󠁧󠁢󠁥󠁮󠁧󠁿", rule: (p) => p.nationality === "Angleterre" }, // New
+    { id: "n-fra", type: "country", label: "Français", icon: "🇫🇷", rule: (p) => p.nationality === "France" },
+    { id: "n-bra", type: "country", label: "Brésilien", icon: "🇧🇷", rule: (p) => p.nationality === "Brésil" },
+    { id: "n-arg", type: "country", label: "Argentin", icon: "🇦🇷", rule: (p) => p.nationality === "Argentine" },
+    { id: "n-esp", type: "country", label: "Espagnol", icon: "🇪🇸", rule: (p) => p.nationality === "Espagne" },
+    { id: "n-eng", type: "country", label: "Anglais", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", rule: (p) => p.nationality === "Angleterre" },
+    { id: "n-por", type: "country", label: "Portugais", icon: "🇵🇹", rule: (p) => p.nationality === "Portugal" },
+    { id: "n-bel", type: "country", label: "Belge", icon: "🇧🇪", rule: (p) => p.nationality === "Belgique" },
 
     // TROPHIES & AWARDS
-    { id: "t-ucl", type: "award", label: "Vainqueur Ligue des Champions", rule: (p) => p.trophies.includes("Ligue des Champions") },
-    { id: "t-cdm", type: "award", label: "Vainqueur Coupe du Monde", rule: (p) => p.trophies.includes("Coupe du Monde") },
-    { id: "t-bo", type: "award", label: "Ballon d'Or", rule: (p) => p.awards.includes("Ballon d'Or") },
-    { id: "t-euro", type: "award", label: "Vainqueur Euro", rule: (p) => p.trophies.includes("Euro") }, // New
+    { id: "t-ucl", type: "award", label: "Vainqueur LDC", icon: "🏆", rule: (p) => p.trophies.includes("Ligue des Champions") },
+    { id: "t-cdm", type: "award", label: "Vainqueur CDM", icon: "🌍", rule: (p) => p.trophies.includes("Coupe du Monde") },
+    { id: "t-bo", type: "award", label: "Ballon d'Or", icon: "🌕", rule: (p) => p.awards.includes("Ballon d'Or") },
+    { id: "t-euro", type: "award", label: "Vainqueur Euro", icon: "🇪🇺", rule: (p) => p.trophies.includes("Euro") },
 
     // MANAGERS
-    { id: "m-pep", type: "stat", label: "Coaché par Guardiola", rule: (p) => p.managers.includes("Pep Guardiola") },
-    { id: "m-mou", type: "stat", label: "Coaché par Mourinho", rule: (p) => p.managers.includes("Jose Mourinho") },
-    { id: "m-zizou", type: "stat", label: "Coaché par Zidane", rule: (p) => p.managers.includes("Zinedine Zidane") },
-    { id: "m-carlo", type: "stat", label: "Coaché par Ancelotti", rule: (p) => p.managers.includes("Carlo Ancelotti") },
-    { id: "m-fergie", type: "stat", label: "Coaché par Ferguson", rule: (p) => p.managers.includes("Alex Ferguson") }, // New
+    { id: "m-pep", type: "stat", label: "Coaché par Guardiola", icon: "🧠", rule: (p) => p.managers.includes("Pep Guardiola") },
+    { id: "m-mou", type: "stat", label: "Coaché par Mourinho", icon: "🚌", rule: (p) => p.managers.includes("Jose Mourinho") },
+    { id: "m-zizou", type: "stat", label: "Coaché par Zidane", icon: "🪄", rule: (p) => p.managers.includes("Zinedine Zidane") },
+    { id: "m-carlo", type: "stat", label: "Coaché par Ancelotti", icon: "🤨", rule: (p) => p.managers.includes("Carlo Ancelotti") },
+    { id: "m-fergie", type: "stat", label: "Coaché par Ferguson", icon: "👺", rule: (p) => p.managers.includes("Alex Ferguson") },
 ];

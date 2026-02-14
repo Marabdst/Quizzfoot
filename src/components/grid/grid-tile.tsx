@@ -43,6 +43,7 @@ export function GridTileCard({ tile, onClick, isActive }: GridTileProps) {
                 "text-xs sm:text-sm font-bold leading-tight",
                 isLocked ? "text-green-400 opacity-50 text-[10px]" : "text-foreground"
             )}>
+                {tile.category.icon && <div className="text-xl mb-1">{tile.category.icon}</div>}
                 {tile.category.label}
             </span>
 
