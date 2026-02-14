@@ -43,7 +43,17 @@ export function GridTileCard({ tile, onClick, isActive }: GridTileProps) {
                 "text-xs sm:text-sm font-bold leading-tight",
                 isLocked ? "text-green-400 opacity-50 text-[10px]" : "text-foreground"
             )}>
-                {tile.category.icon && <div className="text-xl mb-1">{tile.category.icon}</div>}
+                {tile.category.icon && (
+                    tile.category.type === 'country' ? (
+                        <img
+                            src={`https://flagcdn.com/w40/${tile.category.icon}.png`}
+                            alt={tile.category.label}
+                            className="w-6 h-4 object-cover rounded-sm mb-1 mx-auto"
+                        />
+                    ) : (
+                        <div className="text-xl mb-1">{tile.category.icon}</div>
+                    )
+                )}
                 {tile.category.label}
             </span>
 

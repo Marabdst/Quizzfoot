@@ -436,13 +436,14 @@ export const GRID_CATEGORIES: GridCategory[] = [
     { id: "l-Bun", type: "league", label: "Bundesliga", icon: "🇩🇪", rule: (p) => p.leagues.includes("Bundesliga") },
 
     // NATIONALITIES
-    { id: "n-fra", type: "country", label: "Français", icon: "🇫🇷", rule: (p) => p.nationality === "France" },
-    { id: "n-bra", type: "country", label: "Brésilien", icon: "🇧🇷", rule: (p) => p.nationality === "Brésil" },
-    { id: "n-arg", type: "country", label: "Argentin", icon: "🇦🇷", rule: (p) => p.nationality === "Argentine" },
-    { id: "n-esp", type: "country", label: "Espagnol", icon: "🇪🇸", rule: (p) => p.nationality === "Espagne" },
-    { id: "n-eng", type: "country", label: "Anglais", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", rule: (p) => p.nationality === "Angleterre" },
-    { id: "n-por", type: "country", label: "Portugais", icon: "🇵🇹", rule: (p) => p.nationality === "Portugal" },
-    { id: "n-bel", type: "country", label: "Belge", icon: "🇧🇪", rule: (p) => p.nationality === "Belgique" },
+    { id: "n-fra", type: "country", label: "Français", icon: "fr", rule: (p) => p.nationality === "France" },
+    { id: "n-bra", type: "country", label: "Brésilien", icon: "br", rule: (p) => p.nationality === "Brésil" },
+    { id: "n-arg", type: "country", label: "Argentin", icon: "ar", rule: (p) => p.nationality === "Argentine" },
+    { id: "n-esp", type: "country", label: "Espagnol", icon: "es", rule: (p) => p.nationality === "Espagne" },
+    { id: "n-eng", type: "country", label: "Anglais", icon: "gb-eng", rule: (p) => p.nationality === "Angleterre" },
+    { id: "n-por", type: "country", label: "Portugais", icon: "pt", rule: (p) => p.nationality === "Portugal" },
+    { id: "n-bel", type: "country", label: "Belge", icon: "be", rule: (p) => p.nationality === "Belgique" },
+    { id: "n-ita", type: "country", label: "Italien", icon: "it", rule: (p) => p.nationality === "Italie" }, // New
 
     // TROPHIES & AWARDS
     { id: "t-ucl", type: "award", label: "Vainqueur LDC", icon: "🏆", rule: (p) => p.trophies.includes("Ligue des Champions") },
